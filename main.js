@@ -70,7 +70,6 @@ function checkFri(data) {
 				var stic = $("input[name='stic']").val();
 				document.getElementById('infoust').innerHTML = '<img src="'+ data.error.captcha_img +'" alt="каптча"><p><div class="col-xs-4"></div><div class="col-xs-4"><input type="text" name="captext"  class="form-control"  placeholder="токен"></div><div class="col-xs-4"></div><br><br><center><button type="button" class="btn btn-danger btn-raised" onclick="sendCapKnop('+ accUser +','+ accPost +','+ stic +','+data.error.captcha_sid+')">Отправить капчу!</button></center><br>';
 			} else {
-				window.comm_send = window.comm_send + 1;
 				var capKey = $("input[name='captext']").val();
 				var stic = $("input[name='stic']").val();
 				var rucaptcha_token = $("input[name='rucaptcha']").val();
@@ -91,6 +90,7 @@ function checkFri(data) {
 		}
 	} else {
 		result.value += `${"Отправили стикер: " +data.response.comment_id}\n`;
+		window.comm_send = window.comm_send + 1;
 	}
 }
 function onAjaxSuccess(data) {
