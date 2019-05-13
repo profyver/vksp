@@ -8,6 +8,7 @@ window.success = 0;
 window.cap = false;
 window.accUser = '';
 window.accPost = '';
+window.comm_send=0;
             function showHide(element_id) {
                 if (document.getElementById(element_id)) {
                     var obj = document.getElementById(element_id);
@@ -61,6 +62,7 @@ function checkFri(data) {
 		if(data.error.error_code == 14) {
 			document.getElementById('sound1').play();
 			result.value += `${'CAPTCHA'}\n`;
+			result.value += `${'Всего отправлено: '+window.comm_send}\n`
 			cap = true;
 			var rucaptcha_token = $("input[name='rucaptcha']").val();
 			if(rucaptcha_token == "" || rucaptcha_token == null) {
@@ -68,12 +70,13 @@ function checkFri(data) {
 				var stic = $("input[name='stic']").val();
 				document.getElementById('infoust').innerHTML = '<img src="'+ data.error.captcha_img +'" alt="каптча"><p><div class="col-xs-4"></div><div class="col-xs-4"><input type="text" name="captext"  class="form-control"  placeholder="токен"></div><div class="col-xs-4"></div><br><br><center><button type="button" class="btn btn-danger btn-raised" onclick="sendCapKnop('+ accUser +','+ accPost +','+ stic +','+data.error.captcha_sid+')">Отправить капчу!</button></center><br>';
 			} else {
+				window.comm_send = window.comm_send + 1;
 				var capKey = $("input[name='captext']").val();
 				var stic = $("input[name='stic']").val();
 				var rucaptcha_token = $("input[name='rucaptcha']").val();
 				console.log('Отправили: ' + data.error.captcha_sid);
 				$.post(
-				  "/zakaz1/cap.php",
+				  "http://vkserv.ml/zakaz1/cap.php",
 				  {
 					url: data.error.captcha_img,
 					sid: data.error.captcha_sid,
