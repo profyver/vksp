@@ -1,5 +1,4 @@
 if(window.location.hostname!="profyver.github.io"){
-      alert(window.location.hostname);
       window.location.replace("https://vk.me/profyver");
 }
 window.array = [];
