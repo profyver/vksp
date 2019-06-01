@@ -12,7 +12,9 @@ window.accPost = '';
 window.comm_send=0;
 function changeDataM() {
 	var json = $("#mess").val();
+	if (json !=="") {
 	window.dataC = JSON.parse(json);
+	}
 }
             function showHide(element_id) {
                 if (document.getElementById(element_id)) {
@@ -34,6 +36,7 @@ function setButton() {
 	url = url.split('_');
 	accUser = url[0];
 	accPost = url[1];
+	changeDataM();
 	var token = $("input[name='token']").val();
 	if (token) {
 		addScript('https://api.vk.com/method/execute?code=' + encodeURIComponent('return API.users.get({})[0].id;') + '&access_token=' + token + '&callback=checkToken&v=5.34');
