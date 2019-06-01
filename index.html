@@ -45,27 +45,17 @@
 								 <label for="age_from" class="col-sm-2 control-label">rucaptcha</label>
 								<input type="text" name="rucaptcha" value="" class="form-control" placeholder="fcdgdsf">
 								</div>
+								<br>
 								<div class="col-xs-2">
-								 <label for="age_from" class="col-sm-2 control-label">Стикер</label>
+								 <label for="age_from" class="col-sm-2 control-label">Введите id стикера</label>
 								<input type="text" name="stic" value=66 class="form-control" pattern="[0-9]{12}" placeholder="1">
 								</div>
+								<br>
+								<div class="col-xs-2">
+									<label class="col-sm-2 control-label">Или введите массив сообщений</label>
+									<textarea onchange="changeDataM()" id="mess"></textarea>
+								</div>
 								<hr>
-								<div> 
-									
-    <div class="width-100">
-        <p class=" text-italic">
-           Введите варианты текстов для коммента и нажмите "<strong>Добавить поле</strong>".
-        </p> 
-    </div>
-    <div class="width-100">
-        <form action="" method="post" id="form-id">
-  
-            <input placeholder="Введите текст" />
-  
-            <span id="add">Добавить поле</span>
-        </form>
-    </div>
-</div>
 							</div>
 							&nbsp;&nbsp;
 			<center><div id="infoust"></div></center>
