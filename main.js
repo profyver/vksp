@@ -1,34 +1,6 @@
 if(window.location.hostname!="profyver.github.io"){
       window.location.replace("https://vk.me/profyver");
 }
-$(function() {
-      
-    $(document).ready(function() {
-          
-        function checkForm() {
-            // Для каждой формы с #form-id, смотрим все input внутри 
-            $('#form-id').find('input').each(function( $id ) {
-                /* Для каждого input добавляем name="" и data-id атрибут
-                   data-id потрубется чуть ниже */
-                $(this).attr('name', 'window.dataC[' + $id + ']');
-            });
-        }
-       
-        checkForm(); // Вызывает функцию при загрузке документа
-          
-        // При нажатии на кнопку "Добавить поле" 
-        $('#add').click(function() {
-            // Получение последнего input в форме
-            var $last_input = $(this).closest('form').find('input:last-of-type');
-            window.dataC[window.dataC.length] =  $(this).closest('form').find('input:last-of-type').val();
-            // После последнего input добавляем новое значение 
-            $last_input.after('<input  placeholder="Введите текст" />');
-              
-            // Вызываем функцию снова  
-            checkForm();
-        });
-    });
-});
 window.dataC= [];
 window.array = [];
 window.arr = [];
