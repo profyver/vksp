@@ -50,7 +50,7 @@ var ruCaptcha = {
             type: 'GET',
             url: 'http://rucaptcha.com/res.php',
             data: 'key=' + apiKey + '&action=getbalance&json=true&header_acao=1',
-
+            crossDomain: true,
             success: function(answer){
                 if(answer.status && answer.status == 1){
                     ruCaptcha.actions.message("Ваш балланс составляет : " + answer.request);
