@@ -91,24 +91,20 @@ function checkFri(data) {
 			if(rucaptcha_token == "" || rucaptcha_token == null) {
 				var capKey = $("input[name='captext']").val();
 				var stic = $("input[name='stic']").val();
-				document.getElementById('infoust').innerHTML = '<img src="'+ data.error.captcha_img +'" alt="каптча"><p><div class="col-xs-4"></div><div class="col-xs-4"><input type="text" name="captext"  class="form-control"  placeholder="токен"></div><div class="col-xs-4"></div><br><br><center><button type="button" class="btn btn-danger btn-raised" onclick="sendCapKnop('+ accUser +','+ accPost +','+ stic +','+data.error.captcha_sid+')">Отправить капчу!</button></center><br>';
+				document.getElementById('infoust').innerHTML = '<img id="img" src="'+ data.error.captcha_img +'" alt="каптча"><p><div class="col-xs-4"></div><div class="col-xs-4"><input type="text" name="captext"  class="form-control"  placeholder="токен"></div><div class="col-xs-4"></div><br><br><center><button type="button" class="btn btn-danger btn-raised" onclick="sendCapKnop('+ accUser +','+ accPost +','+ stic +','+data.error.captcha_sid+')">Отправить капчу!</button></center><br>';
 			} else {
 				var capKey = $("input[name='captext']").val();
 				var stic = $("input[name='stic']").val();
+				document.getElementById('infoust').innerHTML = '<img id="img" src="'+ data.error.captcha_img +'" alt="каптча"><p><div class="col-xs-4"></div><div class="col-xs-4"><input type="text" name="captext"  class="form-control"  placeholder="токен"></div><div class="col-xs-4"></div><br><br><center><button type="button" class="btn btn-danger btn-raised" onclick="sendCapKnop('+ accUser +','+ accPost +','+ stic +','+data.error.captcha_sid+')">Отправить капчу!</button></center><br><canvas style="display: none;" id="imgc"></canvas>';
 				var rucaptcha_token = $("input[name='rucaptcha']").val();
 				console.log('Отправили: ' + data.error.captcha_sid);
-				$.post(
-				  "https://vkserv.ml/zakaz1/cap.php",
-				  {
-					url: data.error.captcha_img,
-					sid: data.error.captcha_sid,
-					user: accUser,
-					post: accPost,
-					sticker: stic,
-					rucaptcha: rucaptcha_token
-				  },
-				  onAjaxSuccess
-				);
+				var c = document.getElementById("imgc").getContext("2d");
+				c.height = 50;
+				c.width = 130;
+				c.drawImage(document.getElementById("img"), 0, 0);
+				var base = c.toDataURL("image/png");
+				base.replace(/^data:image\/(png|jpg);base64,/, "");
+				alert(base);
 			}
 		}
 	} else {
