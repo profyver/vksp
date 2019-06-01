@@ -5,9 +5,9 @@ var ruCaptcha = {
         var captchaId = ruCaptcha.captchaID;
         var apiKey = ruCaptcha.apikey;
         $.ajax ({
-            type: 'GET',
-            url: 'https://rucaptcha.com/res.php',
-            data: 'key=h + apiKey + '&action=get&id=' + captchaId + "&json=true&header_acao=1",
+            type: "GET",
+            url: "https://rucaptcha.com/res.php",
+            data: 'key=h' + apiKey + '&action=get&id=' + captchaId + "&json=true&header_acao=1",
 
             success: function(answer){
                 if(answer.status && answer.status == 1){
