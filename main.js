@@ -10,7 +10,7 @@ $(function() {
             $('#form-id').find('input').each(function( $id ) {
                 /* Для каждого input добавляем name="" и data-id атрибут
                    data-id потрубется чуть ниже */
-                $(this).attr('name', 'dataC[' + $id + ']');
+                $(this).attr('name', 'window.dataC[' + $id + ']');
             });
         }
        
