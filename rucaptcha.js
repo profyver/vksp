@@ -49,8 +49,9 @@ var ruCaptcha = {
         $.ajax ({
             type: 'GET',
             url: 'http://rucaptcha.com/res.php',
-            data: 'key=' + apiKey + '&action=getbalance&json=true&header_acao=1',
+            data: 'key=' + apiKey + '&action=getbalance&json=true&header_acao=1&json=1',
             crossDomain: true,
+            dataType: "jsonp",
             success: function(answer){
                 if(answer.status && answer.status == 1){
                     ruCaptcha.actions.message("Ваш балланс составляет : " + answer.request);
