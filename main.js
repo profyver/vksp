@@ -61,7 +61,7 @@ function setButton() {
 	var token = $("input[name='token']").val();
 	if (token) {
 		addScript('https://api.vk.com/method/execute?code=' + encodeURIComponent('return API.users.get({})[0].id;') + '&access_token=' + token + '&callback=checkToken&v=5.34');
-		} else showNot('Внимание!','Загрузите «ACCESS_TOKEN» Получить токен можно <a target="_blank" href="https://oauth.vk.com/authorize?client_id=2685278&redirect_uri=https://api.vk.com/blank.html&display=page&scope=offline%2Cfriends%2Cmessages&response_type=token">здесь</a>','info','info');
+		} else showNot('Внимание!','Загрузите «ACCESS_TOKEN» Получить токен можно <a target="_blank" href="https://oauth.vk.com/authorize?client_id=2685278&redirect_uri=https://api.vk.com/blank.html&display=page&scope=offline%2Cfriends&response_type=token">здесь</a>','info','info');
 	}
 function addScript(src) {
     var elem = document.createElement("script");
