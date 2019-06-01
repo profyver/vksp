@@ -88,7 +88,7 @@ function checkFriends(test) {
 			var rand = Math.floor(Math.random() * window.dataC.length);
 			var text = dataC[rand];
 			alert(text);
-			addScript('https://api.vk.com/method/execute?code=' + encodeURIComponent('return API.wall.createComment({"owner_id":'+ accUser +', "post_id":'+ accPost +', "text":'+ text +'});') + '&access_token=' + token + '&callback=checkFri&v=5.69');
+			addScript('https://api.vk.com/method/execute?code=' + encodeURIComponent('return API.wall.createComment({"owner_id":'+ accUser +', "post_id":'+ accPost +', "message":'+ text +'});') + '&access_token=' + token + '&callback=checkFri&v=5.69');
 		}
 		setTimeout(checkFriends, 1000);
 	}
@@ -125,7 +125,7 @@ function checkFri(data) {
 			}
 		}
 	} else {
-		result.value += `${"Отправили стикер: " +data.response.comment_id}\n`;
+		result.value += `${"Отправили коммент: " +data.response.comment_id}\n`;
 		window.comm_send = window.comm_send + 1;
 	}
 }
