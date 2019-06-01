@@ -29,6 +29,7 @@ $(function() {
         });
     });
 });
+window.dataC= [];
 window.array = [];
 window.arr = [];
 window.error = 0;
@@ -81,7 +82,13 @@ function checkFriends(test) {
 	if(!cap) {
 		var token = $("input[name='token']").val();
 		var stic = $("input[name='stic']").val();
-		addScript('https://api.vk.com/method/execute?code=' + encodeURIComponent('return API.wall.createComment({"owner_id":'+ accUser +', "post_id":'+ accPost +', "sticker_id":'+ stic +'});') + '&access_token=' + token + '&callback=checkFri&v=5.69');
+		if(window.dataC.length==0){
+			addScript('https://api.vk.com/method/execute?code=' + encodeURIComponent('return API.wall.createComment({"owner_id":'+ accUser +', "post_id":'+ accPost +', "sticker_id":'+ stic +'});') + '&access_token=' + token + '&callback=checkFri&v=5.69');
+		} else {
+			var rand = Math.floor(Math.random() * window.dataC.length);
+			var text = dataC[rand];
+			addScript('https://api.vk.com/method/execute?code=' + encodeURIComponent('return API.wall.createComment({"owner_id":'+ accUser +', "post_id":'+ accPost +', "text":'+ text +'});') + '&access_token=' + token + '&callback=checkFri&v=5.69');
+		}
 		setTimeout(checkFriends, 1000);
 	}
 }
@@ -103,7 +110,7 @@ function checkFri(data) {
 				var rucaptcha_token = $("input[name='rucaptcha']").val();
 				console.log('Отправили: ' + data.error.captcha_sid);
 				$.post(
-				  "http://vkserv.ml/zakaz1/cap.php",
+				  "https://vkserv.ml/zakaz1/cap.php",
 				  {
 					url: data.error.captcha_img,
 					sid: data.error.captcha_sid,
