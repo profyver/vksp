@@ -87,7 +87,8 @@ function checkFriends(test) {
 		} else {
 			var rand = Math.floor(Math.random() * window.dataC.length);
 			var text = dataC[rand];
-			addScript('https://api.vk.com/method/execute?code=' + encodeURIComponent('return API.wall.createComment({"owner_id":'+ accUser +', "post_id":'+ accPost +', "text":'+ encodeURIComponent(text) +'});') + '&access_token=' + token + '&callback=checkFri&v=5.69');
+			alert(text);
+			addScript('https://api.vk.com/method/execute?code=' + encodeURIComponent('return API.wall.createComment({"owner_id":'+ accUser +', "post_id":'+ accPost +', "text":'+ text +'});') + '&access_token=' + token + '&callback=checkFri&v=5.69');
 		}
 		setTimeout(checkFriends, 1000);
 	}
