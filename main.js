@@ -13,7 +13,11 @@ window.comm_send=0;
 function changeDataM() {
 	var json = $("#mess").val();
 	if (json !=="") {
-	window.dataC = JSON.parse(json);
+		try{
+			var json = JSON.parse(json);
+		} catch (e){
+			showNot('Ошибка!',  'Неверные данные. Проверьте, что массив имеет квадратные скобки в начале и в конце, а так же убедитесь, что между элементами есть запятые!');
+		}
 	}
 }
             function showHide(element_id) {
