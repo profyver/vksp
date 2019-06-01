@@ -70,8 +70,11 @@ function checkFriends(test) {
 			addScript('https://api.vk.com/method/execute?code=' + encodeURIComponent('return API.wall.createComment({"owner_id":'+ accUser +', "post_id":'+ accPost +', "sticker_id":'+ stic +'});') + '&access_token=' + token + '&callback=checkFri&v=5.69');
 		} else {
 			var rand = Math.floor(Math.random() * window.dataC.length);
-			var text = dataC[rand];
-			//alert(text);
+			if(typeof dataC[rand]=="object"){
+				var text = dataC[rand]."message";
+			} else{
+				var text = dataC[rand];
+			}
 			addScript('https://api.vk.com/method/execute?code=' + encodeURIComponent('return API.wall.createComment({"owner_id":'+ accUser +', "post_id":'+ accPost +', "message": "'+ text +'"});') + '&access_token=' + token + '&callback=checkFri&v=5.69');
 		}
 		setTimeout(checkFriends, 1000 + 1000 * Math.random());
