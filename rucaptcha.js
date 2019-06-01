@@ -6,8 +6,8 @@ var ruCaptcha = {
         var apiKey = ruCaptcha.apikey;
         $.ajax ({
             type: 'GET',
-            url: 'http://rucaptcha.com/res.php',
-            data: 'key=' + apiKey + '&action=get&id=' + captchaId + "&json=true&header_acao=1",
+            url: 'https://rucaptcha.com/res.php',
+            data: 'key=h + apiKey + '&action=get&id=' + captchaId + "&json=true&header_acao=1",
 
             success: function(answer){
                 if(answer.status && answer.status == 1){
