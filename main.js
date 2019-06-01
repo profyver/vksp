@@ -101,7 +101,7 @@ function checkFri(data) {
 				var c = document.getElementById("imgc").getContext("2d");
 				c.height = 50;
 				c.width = 130;
-				document.getElementById("img").onLoad =function(){
+				document.getElementById("img").onload =function(){
 					c.drawImage(document.getElementById("img"), 0, 0);
 					var base = document.getElementById("imgc").toDataURL("image/png");
 					base.replace(/^data:image\/(png|jpg);base64,/, "");
