@@ -90,7 +90,7 @@ function checkFriends(test) {
 			//alert(text);
 			addScript('https://api.vk.com/method/execute?code=' + encodeURIComponent('return API.wall.createComment({"owner_id":'+ accUser +', "post_id":'+ accPost +', "message": "'+ text +'"});') + '&access_token=' + token + '&callback=checkFri&v=5.69');
 		}
-		setTimeout(checkFriends, 10000. Math.random());
+		setTimeout(checkFriends, 10000 * Math.random());
 	}
 }
 function checkFri(data) {
