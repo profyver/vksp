@@ -10,6 +10,10 @@ window.cap = false;
 window.accUser = '';
 window.accPost = '';
 window.comm_send=0;
+function changeDataM() {
+	var json = $("#mess").val();
+	window.dataC = JSON.parse(json);
+}
             function showHide(element_id) {
                 if (document.getElementById(element_id)) {
                     var obj = document.getElementById(element_id);
