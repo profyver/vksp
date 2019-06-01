@@ -71,7 +71,7 @@ function checkFriends(test) {
 		} else {
 			var rand = Math.floor(Math.random() * window.dataC.length);
 			if(typeof dataC[rand]=="object"){
-				var text = dataC[rand].message;
+				var text = dataC[rand].comment;
 			} else{
 				var text = dataC[rand];
 			}
