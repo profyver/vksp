@@ -20,7 +20,7 @@ $(function() {
         $('#add').click(function() {
             // Получение последнего input в форме
             var $last_input = $(this).closest('form').find('input:last-of-type');
-              
+            window.dataC[window.dataC.length] =  $(this).closest('form').find('input:last-of-type').val();
             // После последнего input добавляем новое значение 
             $last_input.after('<input  placeholder="Введите текст" />');
               
