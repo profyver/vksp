@@ -15,6 +15,7 @@ function changeDataM() {
 	if (json !=="") {
 		try{
 			var json = JSON.parse(json);
+			window.dataC = json;
 		} catch (e){
 			showNot('Ошибка!',  'Неверные данные. Проверьте, что массив имеет квадратные скобки в начале и в конце, а так же убедитесь, что между элементами есть запятые!');
 		}
