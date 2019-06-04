@@ -54,7 +54,9 @@ function setButton() {
       url = url.split('wall')[1].split('_');
       userArr[userArr.length] = url[0];
       postArr[postArr.length] = url[1];
-      tokenArr[tokenArr.length] = $("input[name='token"+ i +"']").val();
+      let token = $("input[name='token"+ i +"']").val();
+      tokenArr[tokenArr.length] = token;
+      checkFriends(token, i)
     }
 
   //var url = $("input[name='url']").val();
