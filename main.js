@@ -98,9 +98,7 @@
     if (window.dataC.length == 0) {
     addScript('https://api.vk.com/method/execute?code=' + encodeURIComponent('return API.wall.createComment({"owner_id":' + userArr[id] + ', "post_id":' + postArr[id] + ', "sticker_id":' + stic + '});') + '&access_token=' + token + '&callback=checkFri'+(id+1)+'&v=5.69');
     } else {
-    var rand =
-    НАХУЙ ЗДЕСЬ natribu.org
-    Math.floor(Math.random() * window.dataC.length);
+    var rand =Math.floor(Math.random() * window.dataC.length);
     if (typeof dataC[rand] == "object") {
     var text = dataC[rand].comment;
     } else {
