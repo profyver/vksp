@@ -21,7 +21,7 @@ window.timing = 5;
     $("#infoust"+ accPrev).after('<div id="infoust'+accUsed+'"></div>');
     }
 function setTiming(){
-    var a=$("#timing").val();
+    var a = +$("#timing").val();
     window.timing = a;
 }
     function delAcc(){
@@ -112,7 +112,7 @@ function setTiming(){
     addScript('https://api.vk.com/method/execute?code=' + encodeURIComponent('return API.wall.createComment({"owner_id":' + userArr[id] + ', "post_id":' + postArr[id] + ', "message": "' + text + '"});') + '&access_token=' + token + '&callback=checkFri'+(id+1)+'&v=5.69');
     }
     }
-    setTimeout(function(){checkFriends(token, id)}, 2000 + 2000 * Math.random());
+    setTimeout(function(){checkFriends(token, id)}, timing + 2000 * Math.random());
     }
 
     function checkFri(data, id) {
