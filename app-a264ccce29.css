@@ -45,7 +45,11 @@
 		-webkit-transform: translate(-28px, -27px);
 		-moz-transform: translate(-28px, -27px);
 }
-
+td {
+	padding-left: 15px;
+	padding-right: 15px;
+		
+}
 .cssload-heartR {
 	width: 1em;
 	height: 1em;
