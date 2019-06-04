@@ -15,7 +15,7 @@ function addAcc(){
   accUsed ++
   var accPrev = accUsed - 1;
   $("tr:contains('" + "Аккаунт " + accPrev + "')").after('<tr><td><p class="control-label">Аккаунт ' + accUsed + ' (<a href="https://oauth.vk.com/authorize?client_id=2685278&redirect_uri=https://api.vk.com/blank.html&display=page&scope=offline%2Cfriends&response_type=token">получить токен</a>)</p><input type="text" name="token'+ accUsed +'" class="form-control" placeholder="от = до &"></td><td><p class="control-label">Ссылка</p><input type="text" name="url'+accUsed+'" class="form-control" placeholder="vk.com/wall-45745333_34298175"></td></tr>');
-  $("#foust"+ accPrev).after('div id="foust'+accUsed+'"></div>');
+  $("#infoust"+ accPrev).after('div id="foust'+accUsed+'"></div>');
 }
 function delAcc(){
   if (accUsed > 1) {
