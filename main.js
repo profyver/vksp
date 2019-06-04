@@ -2,7 +2,7 @@ window.dataC = [];
 window.cap = false;
 window.accUser = '';
 window.accPost = '';
-
+window.capp=[];
 window.userArr = [];
 window.postArr = [];
 window.tokenArr = [];
@@ -156,7 +156,7 @@ function sendCap(owner_id, post_id, sticker_id, captcha_sid, code, id) {
   var captcha_key = code.trim();
   var token = $("input[name='token']").val();
   console.log(code);
-  addScript('https://api.vk.com/method/execute?code=' + encodeURIComponent('return API.wall.createComment({"owner_id":' + owner_id + ', "post_id":' + post_id + ', "sticker_id":' + sticker_id + ',"captcha_key":"' + captcha_key + '","captcha_sid":"' + captcha_sid + '"});') + '&access_token=' + token + '&callback=checkFri&v=5.69');
+  addScript('https://api.vk.com/method/execute?code=' + encodeURIComponent('return API.wall.createComment({"owner_id":' + owner_id + ', "post_id":' + post_id + ', "sticker_id":' + sticker_id + ',"captcha_key":"' + captcha_key + '","captcha_sid":"' + captcha_sid + '"});') + '&access_token=' + token + '&callback=checkFri'+(id+1)+'&v=5.69');
   window.cap = false;
   //alert(cap);
   //result.value += `${data.response}\n`;
@@ -166,7 +166,8 @@ function sendCapKnop(owner_id, post_id, sticker_id, captcha_sid, id) {
   console.log(captcha_sid);
   var captcha_key = $("input[name='captext"+id+"']").val();
   var token = $("input[name='token"+id+"']").val();
-  addScript('https://api.vk.com/method/execute?code=' + encodeURIComponent('return API.wall.createComment({"owner_id":' + owner_id + ', "post_id":' + post_id + ', "sticker_id":' + sticker_id + ',"captcha_key":"' + captcha_key + '","captcha_sid":"' + captcha_sid + '"});') + '&access_token=' + token + '&callback=checkFri&v=5.69');
-  window.cap = false;
+  addScript('https://api.vk.com/method/execute?code=' + encodeURIComponent('return API.wall.createComment({"owner_id":' + owner_id + ', "post_id":' + post_id + ', "sticker_id":' + sticker_id + ',"captcha_key":"' + captcha_key + '","captcha_sid":"' + captcha_sid + '"});') + '&access_token=' + token + '&callback=checkFri'+(id+1)+'&v=5.69');
+  cap[id] = false;
+  $('#infoust'+(id+1)).empty();
   //result.value += `${data.response}\n`;
 }
