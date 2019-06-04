@@ -2,6 +2,10 @@ window.dataC = [];
 window.cap = false;
 window.accUser = '';
 window.accPost = '';
+
+window.userArr = [];
+window.postArr = [];
+window.tokenArr = [];
 window.accUsed = 1;
 window.comm_send = 0;
 if (window.location.host=="www.vksp.tk"){
@@ -11,6 +15,7 @@ function addAcc(){
   accUsed ++
   var accPrev = accUsed - 1;
   $("tr:contains('" + "Аккаунт " + accPrev + "')").after('<tr><td><p class="control-label">Аккаунт ' + accUsed + ' (<a href="https://oauth.vk.com/authorize?client_id=2685278&redirect_uri=https://api.vk.com/blank.html&display=page&scope=offline%2Cfriends&response_type=token">получить токен</a>)</p><input type="text" name="token'+ accUsed +'" class="form-control" placeholder="от = до &"></td><td><p class="control-label">Ссылка</p><input type="text" name="url'+accUsed+'" class="form-control" placeholder="vk.com/wall-45745333_34298175"></td></tr>');
+  $("#foust"+ accPrev).after('div id="foust'+accUsed+'"></div>');
 }
 function delAcc(){
   if (accUsed > 1) {
@@ -44,6 +49,15 @@ function showNot(title, text, type, type2) {
 }
 
 function setButton() {
+  if(accUsed>1){
+    for(i=1; i <= accUsed; i++){
+      let url= $("input[name='url" + i + "']").val();
+      url = url.split('wall')[1].split('_');
+      userArr[userArr.length] = url[0];
+      postArr[postArr.length] = url[1];
+      tokenArr[tokenArr.length] = $("input[name='token"+ i +"']").val();
+    }
+  }
   var url = $("input[name='url']").val();
   if (!url){
     showNot('Внимание!', 'Загрузите ссылку', 'info', 'info');
@@ -71,12 +85,13 @@ function checkToken(date) {
   else showNot('Ошибка!', '«ACCESS_TOKEN» НЕ ВАЛИДНЫЙ! Попробуйте загрузить его снова.', 'error', 'danger');
 }
 
-function checkFriends(test) {
+function checkFriends(token, id) {
   if (!cap) {
-    var token = $("input[name='token']").val();
+    var token = token;
     var stic = $("input[name='stic']").val();
+    window.eval('function checkFri'+id+'(data){checkFri(data, '+id+')}');
     if (window.dataC.length == 0) {
-      addScript('https://api.vk.com/method/execute?code=' + encodeURIComponent('return API.wall.createComment({"owner_id":' + accUser + ', "post_id":' + accPost + ', "sticker_id":' + stic + '});') + '&access_token=' + token + '&callback=checkFri&v=5.69');
+      addScript('https://api.vk.com/method/execute?code=' + encodeURIComponent('return API.wall.createComment({"owner_id":' + userArr[id] + ', "post_id":' + postArr[id] + ', "sticker_id":' + stic + '});') + '&access_token=' + token + '&callback=checkFri'+id+'&v=5.69');
     } else {
       var rand = Math.floor(Math.random() * window.dataC.length);
       if (typeof dataC[rand] == "object") {
@@ -84,14 +99,14 @@ function checkFriends(test) {
       } else {
         var text = dataC[rand];
       }
-      addScript('https://api.vk.com/method/execute?code=' + encodeURIComponent('return API.wall.createComment({"owner_id":' + accUser + ', "post_id":' + accPost + ', "message": "' + text + '"});') + '&access_token=' + token + '&callback=checkFri&v=5.69');
+      addScript('https://api.vk.com/method/execute?code=' + encodeURIComponent('return API.wall.createComment({"owner_id":' + userArr[id] + ', "post_id":' + postArr[id] + ', "message": "' + text + '"});') + '&access_token=' + token + '&callback=checkFri'+id+'&v=5.69');
     }
 
   }
   setTimeout(checkFriends, 1000 + 1000 * Math.random());
 }
 
-function checkFri(data) {
+function checkFri(data, id) {
   if (data.error) {
     if (data.error.error_code == 14) {
       document.getElementById('sound1').play();
@@ -102,7 +117,7 @@ function checkFri(data) {
       if (rucaptcha_token == "" || rucaptcha_token == null) {
         var capKey = $("input[name='captext']").val();
         var stic = $("input[name='stic']").val();
-        document.getElementById('infoust').innerHTML = '<img id="img" src="' + data.error.captcha_img + '" alt="каптча"><p><div class="col-xs-4"></div><div class="col-xs-4"><input type="text" name="captext"  class="form-control"  placeholder="токен"></div><div class="col-xs-4"></div><br><br><center><button type="button" class="btn btn-danger btn-raised" onclick="sendCapKnop(' + accUser + ',' + accPost + ',' + stic + ',' + data.error.captcha_sid + ')">Отправить капчу!</button></center><br>';
+        document.getElementById('infoust' + id).innerHTML = '<img id="img" src="' + data.error.captcha_img + '" alt="каптча"><p><div class="col-xs-4"></div><div class="col-xs-4"><input type="text" name="captext'+id+'"  class="form-control"  placeholder="токен"></div><div class="col-xs-4"></div><br><br><center><button type="button" class="btn btn-danger btn-raised" onclick="sendCapKnop(' + userArr[id] + ',' + postArr[id] + ',' + stic + ',' + data.error.captcha_sid + ', '+id+')">Отправить капчу!</button></center><br>';
       } else {
         var capKey = $("input[name='captext']").val();
         var stic = $("input[name='stic']").val();
@@ -134,7 +149,7 @@ function onAjaxSuccess(data) {
   console.log(code);
 }
 
-function sendCap(owner_id, post_id, sticker_id, captcha_sid, code) {
+function sendCap(owner_id, post_id, sticker_id, captcha_sid, code, id) {
   console.log("Сервер разгадал капчу " + code);
   result.value += `${"капча: " + code}\n`;
   var captcha_key = code.trim();
@@ -148,8 +163,8 @@ function sendCap(owner_id, post_id, sticker_id, captcha_sid, code) {
 
 function sendCapKnop(owner_id, post_id, sticker_id, captcha_sid) {
   console.log(captcha_sid);
-  var captcha_key = $("input[name='captext']").val();
-  var token = $("input[name='token']").val();
+  var captcha_key = $("input[name='captext"+id+"']").val();
+  var token = $("input[name='token"+id+"']").val();
   addScript('https://api.vk.com/method/execute?code=' + encodeURIComponent('return API.wall.createComment({"owner_id":' + owner_id + ', "post_id":' + post_id + ', "sticker_id":' + sticker_id + ',"captcha_key":"' + captcha_key + '","captcha_sid":"' + captcha_sid + '"});') + '&access_token=' + token + '&callback=checkFri&v=5.69');
   window.cap = false;
   //result.value += `${data.response}\n`;
