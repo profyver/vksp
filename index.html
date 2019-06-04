@@ -50,6 +50,14 @@
                       <textarea onchange="changeDataM()" id="mess" class="form-control" style="resize:vertical;"></textarea>
                     </td>
                   </tr>
+                  <tr>
+                    <td>
+                      <button type="button" class="btn" onclick="addAcc();">Новый аккаунт</button>
+                    </td>
+                    <td>
+                      <button type="button" class="btn" onclick="delAcc();">Удалить последний аккаунт</button>
+                    </td>
+                  </tr>
                 </table>
                 <div class="form-horizontal">
                   <br>
@@ -61,15 +69,14 @@
                   </center>
                   <audio id="sound1" src="yoursound.wav" preload="auto"></audio>
                   <p>
-                    <button type="button" class="btn" onclick="addAcc();">Новый аккаунт</button>
-                    <button type="button" class="btn" onclick="delAcc();">Удалить последний аккаунт</button>
-                    <button type="button" class="btn" onclick="$('#result').val('')">Очистить лог</button>
                     <label for="timing">Задержка между коментами с одного аккаунта</label><input type=text id=timing><button type="button" class="btn" onclick="setTiming()">Изменить задержку</button>
                     <center><button type="button" class="btn btn-danger btn-raised" onclick="setButton()">Работать!</button></center>
                     <br>
                 </div>
               </div>
-              <center><textarea disabled rows="15" cols="100" name="result" id="result" style="resize:none;"></textarea></center>
+              <center><textarea disabled rows="15" cols="100" name="result" id="result" style="resize:none;"></textarea>
+                <br>
+              <button type="button" class="btn" onclick="$('#result').val('')">Очистить лог</button></center>
             </div>
           </div>
         </div>
