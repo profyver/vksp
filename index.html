@@ -24,23 +24,29 @@
                       <input type="text" name="token" class="form-control" placeholder="от = до &">
                     </td>
                     <td>
-                      <label for="age_from" class="col-sm-2 control-label">Ссылка</label>
+                      <p class="control-label">Ссылка</p>
                       <input type="text" name="url" class="form-control" placeholder="vk.com/wall-45745333_34298175">
                     </td>
                   </tr>
                   <tr>
                     <td colspan="2">
-                      <p  class="control-label" align=center>rucaptcha</p>
+                      <p class="control-label" align=center>rucaptcha</p>
                       <input type="text" name="rucaptcha" value="" class="form-control" placeholder="token">
                     </td>
                   </tr>
                   <tr>
                     <td>
-                      <label for="age_from" class="col-sm-2 control-label">Введите id стикера</label>
-                      <input type="text" name="stic" value=66 class="form-control" pattern="[0-9]{12}" placeholder="1">
+                      <p class="control-label">Введите id стикера</p>
                     </td>
                     <td>
-                      <label class="col-sm-2 control-label">Или введите массив сообщений</label>
+                      <p class="control-label">Или введите массив сообщений</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                       <input type="text" name="stic" value=66 class="form-control" pattern="[0-9]{12}" placeholder="1">
+                    </td>
+                    <td>
                       <textarea onchange="changeDataM()" id="mess" class="form-control"></textarea>
                     </td>
                   </tr>
