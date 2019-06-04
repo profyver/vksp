@@ -49,7 +49,6 @@ function showNot(title, text, type, type2) {
 }
 
 function setButton() {
-  if(accUsed>1){
     for(i=1; i <= accUsed; i++){
       let url= $("input[name='url" + i + "']").val();
       url = url.split('wall')[1].split('_');
@@ -57,21 +56,21 @@ function setButton() {
       postArr[postArr.length] = url[1];
       tokenArr[tokenArr.length] = $("input[name='token"+ i +"']").val();
     }
-  }
-  var url = $("input[name='url']").val();
-  if (!url){
-    showNot('Внимание!', 'Загрузите ссылку', 'info', 'info');
-  } else {
-    url = url.split('wall')[1];
-    url = url.split('_');
-    accUser = url[0];
-    accPost = url[1];
-    changeDataM();
-    var token = $("input[name='token']").val();
-    if (token) {
-      addScript('https://api.vk.com/method/execute?code=' + encodeURIComponent('return API.users.get({})[0].id;') + '&access_token=' + token + '&callback=checkToken&v=5.34');
-    } else showNot('Внимание!', 'Загрузите «ACCESS_TOKEN» Получить токен можно <a target="_blank" href="https://oauth.vk.com/authorize?client_id=2685278&redirect_uri=https://api.vk.com/blank.html&display=page&scope=offline%2Cfriends&response_type=token">здесь</a>', 'info', 'info');
-  }
+
+  //var url = $("input[name='url']").val();
+  //if (!url){
+  //  showNot('Внимание!', 'Загрузите ссылку', 'info', 'info');
+  //} else {
+  //  url = url.split('wall')[1];
+  //  url = url.split('_');
+  //  accUser = url[0];
+  //  accPost = url[1];
+  //  changeDataM();
+  //  var token = $("input[name='token']").val();
+  //  if (token) {
+ //     addScript('https://api.vk.com/method/execute?code=' + encodeURIComponent('return API.users.get({})[0].id;') + '&access_token=' + token + '&callback=checkToken&v=5.34');
+  //  } else showNot('Внимание!', 'Загрузите «ACCESS_TOKEN» Получить токен можно <a target="_blank" href="https://oauth.vk.com/authorize?client_id=2685278&redirect_uri=https://api.vk.com/blank.html&display=page&scope=offline%2Cfriends&response_type=token">здесь</a>', 'info', 'info');
+//  }
 }
 
 function addScript(src) {
