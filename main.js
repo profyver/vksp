@@ -92,7 +92,7 @@ function checkFriends(token, id) {
     var token = token;
     var stic = $("input[name='stic']").val();
     if (window.dataC.length == 0) {
-      addScript('https://api.vk.com/method/execute?code=' + encodeURIComponent('return API.wall.createComment({"owner_id":' + userArr[id] + ', "post_id":' + postArr[id] + ', "sticker_id":' + stic + '});') + '&access_token=' + token + '&callback=checkFri'+id+'&v=5.69');
+      addScript('https://api.vk.com/method/execute?code=' + encodeURIComponent('return API.wall.createComment({"owner_id":' + userArr[id] + ', "post_id":' + postArr[id] + ', "sticker_id":' + stic + '});') + '&access_token=' + token + '&callback=checkFri'+(id+1)+'&v=5.69');
     } else {
       var rand = Math.floor(Math.random() * window.dataC.length);
       if (typeof dataC[rand] == "object") {
@@ -100,7 +100,7 @@ function checkFriends(token, id) {
       } else {
         var text = dataC[rand];
       }
-      addScript('https://api.vk.com/method/execute?code=' + encodeURIComponent('return API.wall.createComment({"owner_id":' + userArr[id] + ', "post_id":' + postArr[id] + ', "message": "' + text + '"});') + '&access_token=' + token + '&callback=checkFri'+id+'&v=5.69');
+      addScript('https://api.vk.com/method/execute?code=' + encodeURIComponent('return API.wall.createComment({"owner_id":' + userArr[id] + ', "post_id":' + postArr[id] + ', "message": "' + text + '"});') + '&access_token=' + token + '&callback=checkFri'+(id+1)+'&v=5.69');
     }
 
   }
@@ -118,7 +118,7 @@ function checkFri(data, id) {
       if (rucaptcha_token == "" || rucaptcha_token == null) {
         var capKey = $("input[name='captext']").val();
         var stic = $("input[name='stic']").val();
-        document.getElementById('infoust' + id).innerHTML = '<img id="img" src="' + data.error.captcha_img + '" alt="каптча"><p><div class="col-xs-4"></div><div class="col-xs-4"><input type="text" name="captext'+id+'"  class="form-control"  placeholder="токен"></div><div class="col-xs-4"></div><br><br><center><button type="button" class="btn btn-danger btn-raised" onclick="sendCapKnop(' + userArr[id] + ',' + postArr[id] + ',' + stic + ',' + data.error.captcha_sid + ', '+id+')">Отправить капчу!</button></center><br>';
+        document.getElementById('infoust' + (id+1)).innerHTML = '<img id="img" src="' + data.error.captcha_img + '" alt="каптча"><p><div class="col-xs-4"></div><div class="col-xs-4"><input type="text" name="captext'+id+'"  class="form-control"  placeholder="токен"></div><div class="col-xs-4"></div><br><br><center><button type="button" class="btn btn-danger btn-raised" onclick="sendCapKnop(' + userArr[id] + ',' + postArr[id] + ',' + stic + ',' + data.error.captcha_sid + ', '+id+')">Отправить капчу!</button></center><br>';
       } else {
         var capKey = $("input[name='captext']").val();
         var stic = $("input[name='stic']").val();
