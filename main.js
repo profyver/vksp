@@ -48,6 +48,7 @@ function showNot(title, text, type, type2) {
 }
 
 function setButton() {
+  changeDataM();
     for(i=1; i <= accUsed; i++){
       let url= $("input[name='url" + i + "']").val();
       url = url.split('wall')[1].split('_');
