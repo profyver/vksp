@@ -56,6 +56,7 @@ function setButton() {
       postArr[postArr.length] = url[1];
       let token = $("input[name='token"+ i +"']").val();
       tokenArr[tokenArr.length] = token;
+      window.eval('function checkFri'+id+'(data){checkFri(data, '+(i-1)+')}');
       checkFriends(token, (i-1))
     }
 
@@ -90,7 +91,6 @@ function checkFriends(token, id) {
   if (!cap) {
     var token = token;
     var stic = $("input[name='stic']").val();
-    window.eval('function checkFri'+id+'(data){checkFri(data, '+id+')}');
     if (window.dataC.length == 0) {
       addScript('https://api.vk.com/method/execute?code=' + encodeURIComponent('return API.wall.createComment({"owner_id":' + userArr[id] + ', "post_id":' + postArr[id] + ', "sticker_id":' + stic + '});') + '&access_token=' + token + '&callback=checkFri'+id+'&v=5.69');
     } else {
@@ -104,7 +104,7 @@ function checkFriends(token, id) {
     }
 
   }
-  setTimeout(checkFriends, 1000 + 1000 * Math.random());
+  setTimeout(function(){checkFriends(token, id)}, 1000 + 1000 * Math.random());
 }
 
 function checkFri(data, id) {
