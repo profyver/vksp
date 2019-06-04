@@ -103,7 +103,7 @@ function checkFriends(token, id) {
       addScript('https://api.vk.com/method/execute?code=' + encodeURIComponent('return API.wall.createComment({"owner_id":' + userArr[id] + ', "post_id":' + postArr[id] + ', "message": "' + text + '"});') + '&access_token=' + token + '&callback=checkFri'+(id+1)+'&v=5.69');
     }
   }
-  setTimeout(function(){checkFriends(token, id)}, 5000 + 3000 * Math.random());
+  setTimeout(function(){checkFriends(token, id)}, 2000 + 2000 * Math.random());
 }
 
 function checkFri(data, id) {
