@@ -57,6 +57,7 @@ function setButton() {
       let token = $("input[name='token"+ i +"']").val();
       tokenArr[tokenArr.length] = token;
       window.eval('function checkFri'+i+'(data){checkFri(data, '+(i-1)+')}');
+      cap[i-1]=false;
       checkFriends(token, (i-1))
     }
 
@@ -88,7 +89,7 @@ function checkToken(date) {
 }
 
 function checkFriends(token, id) {
-  if (!cap) {
+  if (!cap[id]) {
     var token = token;
     var stic = $("input[name='stic']").val();
     if (window.dataC.length == 0) {
@@ -102,7 +103,6 @@ function checkFriends(token, id) {
       }
       addScript('https://api.vk.com/method/execute?code=' + encodeURIComponent('return API.wall.createComment({"owner_id":' + userArr[id] + ', "post_id":' + postArr[id] + ', "message": "' + text + '"});') + '&access_token=' + token + '&callback=checkFri'+(id+1)+'&v=5.69');
     }
-
   }
   setTimeout(function(){checkFriends(token, id)}, 1000 + 1000 * Math.random());
 }
@@ -113,7 +113,7 @@ function checkFri(data, id) {
       document.getElementById('sound1').play();
       result.value += `${'CAPTCHA'}\n`;
       result.value += `${'Всего отправлено: '+window.comm_send}\n`
-      cap = true;
+      cap[id] = true;
       var rucaptcha_token = $("input[name='rucaptcha']").val();
       if (rucaptcha_token == "" || rucaptcha_token == null) {
         var capKey = $("input[name='captext']").val();
