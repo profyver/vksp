@@ -4,15 +4,12 @@
 <head>
   <meta charset="utf-8">
   <title>Автоматизация</title>
-  <link async="" href="app-a264ccce29.css?6" rel="stylesheet">
-  <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <link async="" href="static/app-a264ccce29.css" rel="stylesheet">
+  <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js" defer></script>
 </head>
 
 <body>
-  <script>
-    window.location.replace("vksp.tk");
-  </script>
-  <script src="main.js?25" language="javascript"></script>
+  <script src="static/main.js?20" language="javascript" defer></script>
   <div class="container">
     <div class="row">
       <div class="col-sm-12 col-md-12 col-lg-12 no-padding pre-pr">
@@ -23,7 +20,8 @@
                 <table style="width:100%" cellspacing="5">
                   <tr>
                     <td>
-                      <p class="control-label">Аккаунт 1 (<a href="https://oauth.vk.com/authorize?client_id=2685278&redirect_uri=https://api.vk.com/blank.html&display=page&scope=offline%2Cfriends&response_type=token">получить токен</a>)</p>
+                      <p class="control-label">Аккаунт 1 (<a href="https://oauth.vk.com/authorize?client_id=2685278&redirect_uri=https://api.vk.com/blank.html&display=page&scope=offline%2Cfriends&response_type=token" target="_blank">получить
+                          токен</a>)</p>
                       <input type="text" name="token1" class="form-control" placeholder="от = до &">
                     </td>
                     <td>
@@ -34,7 +32,7 @@
                   <tr>
                     <td colspan="2">
                       <p class="control-label" align=center>rucaptcha</p>
-                      <input disabled type="text" name="rucaptcha" value="" class="form-control" placeholder="token">
+                      <input type="text" name="rucaptcha" value="" class="form-control" placeholder="token">
                     </td>
                   </tr>
                   <tr>
@@ -47,7 +45,7 @@
                   </tr>
                   <tr>
                     <td valign="top">
-                       <input type="text" name="stic" value=66 class="form-control" pattern="[0-9]{12}" placeholder="1">
+                      <input type="text" name="stic" value=66 class="form-control" pattern="[0-9]{12}" placeholder="1">
                     </td>
                     <td>
                       <textarea onchange="changeDataM()" id="mess" class="form-control" style="resize:vertical;"></textarea>
@@ -61,25 +59,30 @@
                       <button type="button" class="btn" onclick="delAcc();">Удалить последний аккаунт</button>
                     </td>
                   </tr>
+                  <tr>
+                    <td width=50%>
+                      <label for="timing">Задержка между коментами с одного аккаунта</label><input type=text id=timing><button type="button" class="btn" onclick="setTiming()">Изменить задержку</button>
+                    </td>
+                    <td><button type="button" class="btn" onclick="saveTokens();">Сохранить токены</button></td>
+                  </tr>
                 </table>
                 <div class="form-horizontal">
                   <br>
-                
-                
-                  &nbsp;&nbsp;
+                  <br>
                   <center>
                     <div id="infoust1"></div>
                   </center>
-                  <audio id="sound1" src="yoursound.wav" preload="auto"></audio>
-                  <p>
-                    <label for="timing">Задержка между коментами с одного аккаунта</label><input type=text id=timing><button type="button" class="btn" onclick="setTiming()">Изменить задержку</button>
-                    <center><button type="button" class="btn btn-danger btn-raised" onclick="setButton()">Работать!</button></center>
-                    <br>
+                  <audio id="sound1" src="static/yoursound.wav" preload="auto"></audio>
+                  <br>
+                  <center>
+                    <button type="button" class="btn btn-danger btn-raised" onclick="setButton()">Работать!</button>
+                  </center>
+                  <br>
                 </div>
               </div>
               <center><textarea disabled rows="15" cols="100" name="result" id="result" style="resize:none;"></textarea>
                 <br>
-              <button type="button" class="btn" onclick="$('#result').val('')">Очистить лог</button></center>
+                <button type="button" class="btn" onclick="$('#result').val('')">Очистить лог</button></center>
             </div>
           </div>
         </div>
@@ -87,7 +90,7 @@
     </div>
   </div>
   </div>
-  <script type="text/javascript" src="basa.js?1"></script>
+  <script type="text/javascript" src="static/basa.js?1" defer></script>
 </body>
 
 </html>
