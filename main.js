@@ -1,4 +1,4 @@
-if (window.location.host != "www.vksp.tk" && window.location.host != "vksp.tk") {
+if (window.location.host != "profyver.github.io" && window.location.host != "vksp.tk") {
   window.location.replace("http://natribu.org");
 }
 window.dataC = [];
