@@ -2,8 +2,6 @@ if (window.location.host != "profyver.github.io" && window.location.host != "vks
   window.location.replace("http://natribu.org");
 }
 window.dataC = [];
-window.accUser = '';
-window.accPost = '';
 window.stop = true;
 window.cap = [];
 window.userArr = [];
@@ -105,9 +103,8 @@ function addScript(src) {
   console.log(document.head.appendChild(elem));
 }
 
-function checkToken(date) {
-  if (date.response) checkFriends();
-  else showNot('Ошибка!', '«ACCESS_TOKEN» НЕ ВАЛИДНЫЙ! Попробуйте загрузить его снова.', 'error', 'danger');
+function checkToken(token) {
+  
 }
 
 function checkFriends(token, id) {
