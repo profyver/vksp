@@ -174,7 +174,7 @@ function sendCap(owner_id, post_id, sticker_id, captcha_sid, code, id) {
 function sendCapKnop(owner_id, post_id, sticker_id, captcha_sid, id) {
   console.log(captcha_sid);
   var captcha_key = $("input[name='captext" + id + "']").val();
-  var token = $("input[name='token" + id + "']").val();n></center></p><br>';
+  var token = $("input[name='token" + id + "']").val();n></center></p><br>;
       } else {
         var capKey = $("input[name='captext']").val();
         var stic = $("input[name='stic']").val();
