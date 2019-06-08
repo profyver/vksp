@@ -139,18 +139,7 @@ function checkFri(data, id) {
       if (rucaptcha_token == "" || rucaptcha_token == null) {
         var capKey = $("input[name='captext']").val();
         var stic = $("input[name='stic']").val();
-        document.getElementById('infoust' + id).innerHTML = '<div align=center class="col-xs-4"><p>Капча для аккаунта '+id+'</p><p><img id="img" src="' + data.error.captcha_img + '" alt="каптча"></p></div><p><div class="col-xs-4"><input type="text" name="captext' + id + '" class="form-control" placeholder="токен"></div><div class="col-xs-4"></div><br><br><center><button type="button" class="btn btn-danger btn-raised" onclick="sendCapKnop(' + userArr[(id-1)] + ',' + postArr[(id-1)] + ',' + stic + ',' + data.error.captcha_sid + ', ' + id + ')">Отправить капчу!</button></center></p><br>';
-      } else {
-        var capKey = $("input[name='captext']").val();
-        var stic = $("input[name='stic']").val();
-        var rucaptcha_token = $("input[name='rucaptcha']").val();
-        console.log('Отправили: ' + data.error.captcha_sid);
-        window.capt = {
-          'user': userArr[id-1],
-          'post': postArr[id-1],
-          'sticker': stic,
-          'sid': data.error.captcha_sid
-        };
+        document.getElementById('infoust' + id).innerHTML = '<p align=center>Капча для аккаунта '+id+'</p><img id="img" src="' + data.error.captcha_img + '" alt="каптча"><p><div class="col-xs-4"><input type="text" name="captext' + id + '" class="form-control" placeholder="токен"></div><center><button type="button" class="btn btn-danger btn-raised" onclick="sendCapKnop(' + userArr[(id-1)] + ',' + postArr[(id-1)] + ',' + stic + ',' + data.error.captcha_sid + ', ' + id + ')">Отправить капчу!</button></center><br>'
         window.eval('function onAjaxSuccess'+id+'(data){onAjaxSuccess(data, '+id+')}')
         $.get(
           "vksp.tk/capt.php", {
@@ -185,7 +174,18 @@ function sendCap(owner_id, post_id, sticker_id, captcha_sid, code, id) {
 function sendCapKnop(owner_id, post_id, sticker_id, captcha_sid, id) {
   console.log(captcha_sid);
   var captcha_key = $("input[name='captext" + id + "']").val();
-  var token = $("input[name='token" + id + "']").val();
+  var token = $("input[name='token" + id + "']").val();n></center></p><br>';
+      } else {
+        var capKey = $("input[name='captext']").val();
+        var stic = $("input[name='stic']").val();
+        var rucaptcha_token = $("input[name='rucaptcha']").val();
+        console.log('Отправили: ' + data.error.captcha_sid);
+        window.capt = {
+          'user': userArr[id-1],
+          'post': postArr[id-1],
+          'sticker': stic,
+          'sid': data.error.captcha_sid
+        };
   if (window.dataC.length == 0) {
     addScript('https://api.vk.com/method/execute?code=' + encodeURIComponent('return API.wall.createComment({"owner_id":' + owner_id + ', "post_id":' + post_id + ', "sticker_id":' + sticker_id + ',"captcha_key":"' + captcha_key + '","captcha_sid":"' + captcha_sid + '"});') + '&access_token=' + token + '&callback=checkFri' + id  + '&v=5.69');
   } else {
