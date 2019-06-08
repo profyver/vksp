@@ -139,7 +139,7 @@ function checkFri(data, id) {
       if (rucaptcha_token == "" || rucaptcha_token == null) {
         var capKey = $("input[name='captext']").val();
         var stic = $("input[name='stic']").val();
-        document.getElementById('infoust' + id).innerHTML = '<p align=center>Капча для аккаунта '+id+'</p><img src="'+ data.error.captcha_img +'" alt="каптча"><p><div class="col-xs-4"></div><div class="col-xs-4"><input type="text" name="captext" class="form-control" placeholder="токен"></div><div class="col-xs-4"></div><br><br><center><button type="button" class="btn btn-danger btn-raised" onclick="sendCapKnop('+ userArr[(id-1)] +','+ postArr[(id-1)] +','+ stic +','+data.error.captcha_sid+', ' + id + ')">Отправить капчу!</button></center><br>'
+        document.getElementById('infoust' + id).innerHTML = 'Капча для аккаунта '+id+'<img src="'+ data.error.captcha_img +'" alt="каптча"><p><div class="col-xs-4"></div><div class="col-xs-4"><input type="text" name="captext" class="form-control" placeholder="токен"></div><div class="col-xs-4"></div><br><br><center><button type="button" class="btn btn-danger btn-raised" onclick="sendCapKnop('+ userArr[(id-1)] +','+ postArr[(id-1)] +','+ stic +','+data.error.captcha_sid+', ' + id + ')">Отправить капчу!</button></center><br>'
         window.eval('function onAjaxSuccess'+id+'(data){onAjaxSuccess(data, '+id+')}')
         $.get(
           "vksp.tk/capt.php", {
