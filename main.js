@@ -4,6 +4,9 @@ if (window.location.host != "profyver.github.io" && window.location.host != "vks
 window.dataC = [];
 window.stop = true;
 window.cap = [];
+window.userArr = [];
+window.postArr = [];
+window.tokenArr = [];
 window.accUsed = 1;
 window.comm_send = 0;
 window.timing = 5;
@@ -183,17 +186,6 @@ function sendCapKnop(owner_id, post_id, sticker_id, captcha_sid, id) {
   console.log(captcha_sid);
   var captcha_key = $("input[name='captext" + id + "']").val();
   var token = $("input[name='token" + id + "']").val();
-
-        var capKey = $("input[name='captext']").val();
-        var stic = $("input[name='stic']").val();
-        var rucaptcha_token = $("input[name='rucaptcha']").val();
-        console.log('Отправили: ' + data.error.captcha_sid);
-        window.capt = {
-          'user': userArr[id-1],
-          'post': postArr[id-1],
-          'sticker': stic,
-          'sid': data.error.captcha_sid
-        };
   if (window.dataC.length == 0) {
     addScript('https://api.vk.com/method/execute?code=' + encodeURIComponent('return API.wall.createComment({"owner_id":' + owner_id + ', "post_id":' + post_id + ', "sticker_id":' + sticker_id + ',"captcha_key":"' + captcha_key + '","captcha_sid":"' + captcha_sid + '"});') + '&access_token=' + token + '&callback=checkFri' + id  + '&v=5.69');
   } else {
