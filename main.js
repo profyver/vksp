@@ -1,6 +1,7 @@
-if (window.location.host != "profyver.github.io" && window.location.host != "vksp.tk" && window.location.host != "95.142.45.233") {
+if (window.location.host != "vksp.tk" && window.location.host != "vkflooder.ga") {
   window.location.replace("http://natribu.org");
 }
+window.api = 'https://api.vk.com/method/execute?code=';
 window.foc = true;
 window.dataC = [];
 window.stop = true;
@@ -8,7 +9,6 @@ window.cap = [];
 window.userArr = [];
 window.postArr = [];
 window.accUsed = 1;
-window.comm_send = 0;
 window.comm_sendArr = [];
 window.coms_betweenCap = [];
 window.banArr = [];
@@ -17,6 +17,8 @@ window.timing = 5;
 window.theme= 'white';
 window.sound = 'def';
 window.capt = [];
+window.settings = false;
+$("#hidden").hide();
 var audio1 = new Audio();
 audio1.preload = 'auto';
 audio1.src = '/yoursound.wav';
@@ -141,16 +143,18 @@ function setButton() {
     $("#work").text("Работать!");
     return;
   }
+  window.comm_send = 0;
   $("#work").text("Остановить работу!");
   changeDataM();
   window.stop = false;
   window.userArr = [];
   window.postArr = [];
+  window.goal = $('#goal').val()
   for (i = 1; i <= accUsed; i++) {
     let url = $("input[name='url" + i + "']").val();
     let token = $("input[name='token" + i + "']").val();
     if (token == '') {
-      showNot('Ошибка!', 'Токен для аккаунта ' + i + ' не задана!', 'error', 'danger', i);
+      showNot('Ошибка!', 'Токен для аккаунта ' + i + ' не задан!', 'error', 'danger', i);
       continue;
     }
     if (url == '' && typeof userArr[0] == 'undefined'&& typeof postArr[0] == 'undefined') {
@@ -179,9 +183,9 @@ function setButton() {
   }
 }
 
-function addScript(src) {
+function addScript(code, token, id) {
   var elem = document.createElement("script");
-  elem.src = src;
+  elem.src = window.api + encodeURIComponent(code) + '&access_token=' + token + '&callback=checkFri' + id + '&v=5.69';
   document.head.appendChild(elem);
 }
 
@@ -190,7 +194,7 @@ function checkFriends(token, id) {
     var token = token;
     var stic = $("input[name='stic']").val();
     if (window.dataC.length == 0) {
-      addScript('https://api.vk.com/method/execute?code=' + encodeURIComponent('return API.wall.createComment({"owner_id":' + userArr[(id - 1)] + ', "post_id":' + postArr[(id - 1)] + ', "sticker_id":' + stic + '});') + '&access_token=' + token + '&callback=checkFri' + id + '&v=5.69');
+      addScript('API.wall.createComment({"owner_id":' + userArr[(id - 1)] + ', "post_id":' + postArr[(id - 1)] + ', "sticker_id":' + stic + '});return API.wall.getComments({"owner_id":' + userArr[(id - 1)] + ', "post_id":' + postArr[(id - 1)] + '}).count;', token, id);
     } else {
       var rand = Math.floor(Math.random() * window.dataC.length);
       if (typeof dataC[rand] == "object") {
@@ -198,14 +202,8 @@ function checkFriends(token, id) {
       } else {
         var text = dataC[rand];
       }
-      addScript('https://api.vk.com/method/execute?code=' + encodeURIComponent('return API.wall.createComment({"owner_id":' + userArr[(id - 1)] + ', "post_id":' + postArr[(id - 1)] + ', "message": "' + text + '"});') + '&access_token=' + token + '&callback=checkFri' + id + '&v=5.69');
+      addScript('API.wall.createComment({"owner_id":' + userArr[(id - 1)] + ', "post_id":' + postArr[(id - 1)] + ', "message": "' + text + '"});return API.wall.getComments({"owner_id":' + userArr[(id - 1)] + ', "post_id":' + postArr[(id - 1)] + '}).count;', token, id);
     }
-    setTimeout(
-      function(){
-        addScript('https://api.vk.com/method/execute?code=' + encodeURIComponent('return API.wall.getComments({"owner_id":' + userArr[(id - 1)] + ', "post_id":' + postArr[(id - 1)] + '});') + '&access_token=' + token + '&callback=showComments&v=5.69');
-      }, timing / 2
-    )
-
   }
   if (!stop) {
     setTimeout(function() {
@@ -213,12 +211,8 @@ function checkFriends(token, id) {
     }, timing * 1000 + 100 * Math.random());
   }
 }
-function showComments(data){
-  if (typeof data['response']['count'] ==='undefined') return;
-  var count = data["response"]["count"];
-  $("#total_post").html("<p>Всего на посте: "+count+"</p>");
-}
 function checkFri(data, id) {
+  if (stop) return;
   if (data.error) {
     if (data.error.error_code == 14) {
       cap[id] = true;
@@ -280,6 +274,10 @@ function checkFri(data, id) {
     $("#total").html("<p>Всего отправили: " + window.comm_send+"</p>");
     $("#log" + id).html("<p>С аккаунта "+id+": " +window.comm_sendArr[id]+"</p>");
     window.coms_betweenCap[id]++;
+    window.count = data["response"];
+    $("#total_post").html("<p>Всего на посте: "+count+"</p>");
+    $("#total_str").html("<p>Чужих комменатариев: "+(window.count - window.comm_send)+"</p>");
+    if (window.count >= window.goal && window.goal!=0) setButton();
   }
 }
 
@@ -291,11 +289,12 @@ function onAjaxSuccess(data, id) {
 }
 
 function sendCap(owner_id, post_id, sticker_id, captcha_sid, code, id) {
+  if (stop) return;
   //console.log("Сервер разгадал капчу " + code);
   var token = $("input[name='token" + id + "']").val();
   var captcha_key = code.trim();
   if (window.dataC.length == 0) {
-    addScript('https://api.vk.com/method/execute?code=' + encodeURIComponent('return API.wall.createComment({"owner_id":' + owner_id + ', "post_id":' + post_id + ', "sticker_id":' + sticker_id + ',"captcha_key":"' + captcha_key + '","captcha_sid":"' + captcha_sid + '"});') + '&access_token=' + token + '&callback=checkFri' + id + '&v=5.69');
+    addScript('API.wall.createComment({"owner_id":' + owner_id + ', "post_id":' + post_id + ', "sticker_id":' + sticker_id + ',"captcha_key":"' + captcha_key + '","captcha_sid":"' + captcha_sid + '"});return API.wall.getComments({"owner_id":' + owner_id + ', "post_id":' + post_id + '}).count;', token, id);
   } else {
     var rand = Math.floor(Math.random() * window.dataC.length);
     if (typeof dataC[rand] == "object") {
@@ -303,7 +302,7 @@ function sendCap(owner_id, post_id, sticker_id, captcha_sid, code, id) {
     } else {
       var text = dataC[rand];
     }
-    addScript('https://api.vk.com/method/execute?code=' + encodeURIComponent('return API.wall.createComment({"owner_id":' + owner_id + ', "post_id":' + post_id + ', "message": "' + text + '", "captcha_key":"' + captcha_key + '", "captcha_sid":"' + captcha_sid + '"});') + '&access_token=' + token + '&callback=checkFri' + id + '&v=5.69');
+    addScript('API.wall.createComment({"owner_id":' + owner_id + ', "post_id":' + post_id + ', "message":"' + text + '","captcha_key":"' + captcha_key + '","captcha_sid":"' + captcha_sid + '"});return API.wall.getComments({"owner_id":' + owner_id + ', "post_id":' + post_id + '}).count;', token, id);
   }
   cap[id] = false;
   $('#infoust' + id).empty();
@@ -314,7 +313,7 @@ function sendCapKnop(owner_id, post_id, sticker_id, captcha_sid, id) {
   var captcha_key = $("input[name='captext" + id + "']").val();
   var token = $("input[name='token" + id + "']").val();
   if (window.dataC.length == 0) {
-    addScript('https://api.vk.com/method/execute?code=' + encodeURIComponent('return API.wall.createComment({"owner_id":' + owner_id + ', "post_id":' + post_id + ', "sticker_id":' + sticker_id + ',"captcha_key":"' + captcha_key + '","captcha_sid":"' + captcha_sid + '"});') + '&access_token=' + token + '&callback=checkFri' + id + '&v=5.69');
+    addScript('API.wall.createComment({"owner_id":' + owner_id + ', "post_id":' + post_id + ', "sticker_id":' + sticker_id + ',"captcha_key":"' + captcha_key + '","captcha_sid":"' + captcha_sid + '"});return API.wall.getComments({"owner_id":' + owner_id + ', "post_id":' + post_id + '}).count;', token, id);
   } else {
     var rand = Math.floor(Math.random() * window.dataC.length);
     if (typeof dataC[rand] == "object") {
@@ -322,7 +321,7 @@ function sendCapKnop(owner_id, post_id, sticker_id, captcha_sid, id) {
     } else {
       var text = dataC[rand];
     }
-    addScript('https://api.vk.com/method/execute?code=' + encodeURIComponent('return API.wall.createComment({"owner_id":' + owner_id + ', "post_id":' + post_id + ', "message": "' + text + '", "captcha_key":"' + captcha_key + '", "captcha_sid":"' + captcha_sid + '"});') + '&access_token=' + token + '&callback=checkFri' + id + '&v=5.69');
+    addScript('API.wall.createComment({"owner_id":' + owner_id + ', "post_id":' + post_id + ', "message":"' + text + '","captcha_key":"' + captcha_key + '","captcha_sid":"' + captcha_sid + '"});return API.wall.getComments({"owner_id":' + owner_id + ', "post_id":' + post_id + '}).count;', token, id);
   }
   cap[id] = false;
   window.foc = true;
