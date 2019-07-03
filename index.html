@@ -59,11 +59,6 @@
                     <button type="button" class="btn" onclick="delAcc();">Удалить последний аккаунт</button>
                   </td>
                 </tr>
-                <?php
-                  if(isset($_SESSION['login'])){
-                    echo '<tr><td><button type="button" class="btn" onclick="addPass();">Добавить аккаунт по паролю</button></td></tr>';
-                  }
-                ?>
                 <tr>
                   <td width=50%>
                     <p>Задержка между коментами с одного аккаунта</p><input type="number" id="timing" value="5" min=0><button type="button" class="btn" onclick="setTiming()">Изменить задержку</button>
