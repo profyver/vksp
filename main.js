@@ -1,4 +1,4 @@
-if (window.location.host != "vksp.tk" && window.location.host != "vkflooder.ga") {
+if (window.location.host != "profyver.github.io" && window.location.host != "vkflooder.ga") {
   window.location.replace("http://natribu.org");
 }
 window.api = 'https://api.vk.com/method/execute?code=';
